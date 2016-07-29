@@ -4,29 +4,44 @@
 void ofApp::setup(){
 
 	
-	sprite.load("img/vaisseau.png");
+	sprite.load("img/test.jpg");
 
+	// alloue l'espace de Fbo et clear la zone
+	fbo.allocate(1024,768);
+	fbo.begin();
+	ofClear(255,255,255, 0);
+	fbo.end();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	if ( x == 1024 ){
+	if ( x >= 1024 ){
 		sensX = -1;
-	} else if ( x == 0 ){
+	} else if ( x <= 0 ){
 		sensX = 1;
 	}
-	if ( y == 768 ){
+	if ( y >= 768 ){
 		sensY = -1;
-	} else if ( y == 0 ){
+	} else if ( y <= 0 ){
 		sensY = 1;
 	}
-	x = x + 1 * sensX;
-	y = y + 1 * sensY;
+	x = x + 3 * sensX;
+	y = y + 3 * sensY;
+
+	// show fps in title.
+	std::stringstream strm;
+	strm << "fps: " << ofGetFrameRate();
+	ofSetWindowTitle(strm.str());
+
+	fbo.begin();
+	ofClear(255,255,255, 0);
+	sprite.draw(x,y);
+	fbo.end();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	sprite.drawSubsection(x,y,87,48,0,500,87,48);
+	fbo.draw(0,0);
 }
 
 //--------------------------------------------------------------

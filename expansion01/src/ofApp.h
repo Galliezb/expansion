@@ -22,6 +22,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 		ofImage sprite;
+		ofFbo fbo;
 		int x,y;
 		short int sensX,sensY;
 		
