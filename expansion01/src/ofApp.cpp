@@ -3,56 +3,73 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	
-	sprite.load("img/test.jpg");
+	Vg::heightScreen = ofGetWindowHeight();
+	Vg::widthScreen = ofGetWindowWidth();
 
-	// alloue l'espace de Fbo et clear la zone
-	fbo.allocate(1024,768);
-	fbo.begin();
-	ofClear(255,255,255, 0);
-	fbo.end();
-	ofSetFrameRate(60);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	if ( x >= 1024 ){
-		sensX = -1;
-	} else if ( x <= 0 ){
-		sensX = 1;
-	}
-	if ( y >= 768 ){
-		sensY = -1;
-	} else if ( y <= 0 ){
-		sensY = 1;
-	}
-	x = x + 3 * sensX;
-	y = y + 3 * sensY;
 
 	// show fps in title.
 	std::stringstream strm;
 	strm << "fps: " << ofGetFrameRate();
 	ofSetWindowTitle(strm.str());
 
-	fbo.begin();
-	ofClear(255,255,255, 0);
-	sprite.draw(x,y);
-	fbo.end();
+	// Camera left right
+	if ( moveCameraLeft ){
+
+		Vg::posHautGaucheCameraX -=  Vg::scrollSpeed;
+		if (Vg::posHautGaucheCameraX <= 0 ){Vg::posHautGaucheCameraX = 0;}
+
+	} else if ( moveCameraRight ){
+
+		Vg::posHautGaucheCameraX += Vg::scrollSpeed;
+		if ( Vg::posHautGaucheCameraX >= 3840-Vg::widthScreen ){Vg::posHautGaucheCameraX = 3840-Vg::widthScreen;}
+
+	}
+	// Camera Top Down
+	if ( moveCameraUp ){
+
+		Vg::posHautGaucheCameraY -=  Vg::scrollSpeed;
+		if ( Vg::posHautGaucheCameraY <= 0 ){Vg::posHautGaucheCameraY = 0;}
+
+	} else if ( moveCameraDown ){
+
+		Vg::posHautGaucheCameraY += Vg::scrollSpeed;
+		if ( Vg::posHautGaucheCameraY >= 2560-Vg::heightScreen ){Vg::posHautGaucheCameraY = 2560-Vg::heightScreen;}
+
+	}
+	std::cout << "camera Y : " << Vg::posHautGaucheCameraY << std::endl;
+	std::cout << "hauteur fenetre: " << Vg::heightScreen << std::endl;
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	//fbo.draw(0,0);
-	sprite.drawSubsection(x,y,30,60,0,0,30,60);
+	map.drawMap();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+	switch (key){
+		case(OF_KEY_LEFT):  moveCameraLeft=true;break;
+		case(OF_KEY_UP):    moveCameraUp=true;break;
+		case(OF_KEY_RIGHT): moveCameraRight=true;break;
+		case(OF_KEY_DOWN):  moveCameraDown=true;break;
+	}
+
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
+	switch (key){
+		case(OF_KEY_LEFT):  moveCameraLeft=false;break;
+		case(OF_KEY_UP):    moveCameraUp=false;break;
+		case(OF_KEY_RIGHT): moveCameraRight=false;break;
+		case(OF_KEY_DOWN):  moveCameraDown=false;break;
+	}
 
 }
 
@@ -88,7 +105,8 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+	Vg::heightScreen = ofGetWindowHeight();
+	Vg::widthScreen = ofGetWindowWidth();
 }
 
 //--------------------------------------------------------------

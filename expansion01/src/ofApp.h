@@ -1,6 +1,6 @@
 #pragma once
-
 #include "ofMain.h"
+#include "ClassBlock.h"
 
 class ofApp : public ofBaseApp{
 
@@ -21,9 +21,10 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-		ofImage sprite;
-		ofFbo fbo;
-		int x,y;
-		short int sensX,sensY;
-		
+		Block map;
+
+		bool moveCameraLeft=false;
+		bool moveCameraUp=false;
+		bool moveCameraRight=false;
+		bool moveCameraDown=false;
 };
