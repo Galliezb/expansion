@@ -3,9 +3,14 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	Vg::heightScreen = ofGetWindowHeight();
-	Vg::widthScreen = ofGetWindowWidth();
+	
+	sprite.load("img/test.jpg");
 
+	// alloue l'espace de Fbo et clear la zone
+	fbo.allocate(1024,768);
+	fbo.begin();
+	ofClear(255,255,255, 0);
+	fbo.end();
 }
 
 //--------------------------------------------------------------
@@ -47,7 +52,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	map.drawMap();
+	fbo.draw(0,0);
 }
 
 //--------------------------------------------------------------
