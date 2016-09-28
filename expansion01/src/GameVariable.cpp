@@ -2,13 +2,17 @@
 #include "GameVariable.h"
 
 // La hauteur et largeur d'écran sera initialisé via setup d'OF au chargement
-int Vg::widthScreen=0;
-int Vg::heightScreen=0;
+int Vg::widthScreen=-1;
+int Vg::heightScreen=-1;
 
-// Nombre de cases a gauche et droite du centre ( max 60 et paire forcé )
+// Nombre de cases horizontal ( DOIT ETRE PAIRE pour un affichage plus correct )
 int Vg::numberOfCaseMapX=10;
-// Max profondeur de la carte ( 20 pour le ciel, 60 max profondeur )
+// Nombre de case vertical
 int Vg::numberOfCaseMapY=6;
+
+// taille d'alocation de la map FBO
+int Vg::fboAllocateWidth = -1;
+int Vg::fboAllocateHeight = -1;
 
 // position X et Y de la camera, par défaut e
 int Vg::posHautGaucheCameraX=0;

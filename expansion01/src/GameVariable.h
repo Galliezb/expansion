@@ -11,6 +11,9 @@ public:
 	static int posHautGaucheCameraX;
 	static int posHautGaucheCameraY;
 
+	static int fboAllocateWidth;
+	static int fboAllocateHeight;
+
 	static int scrollSpeed;
 
 private :
