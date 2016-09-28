@@ -28,5 +28,4 @@ class ofApp : public ofBaseApp{
 		bool moveCameraRight=false;
 		bool moveCameraDown=false;
 
-		bool test = false;
 };
