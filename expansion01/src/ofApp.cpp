@@ -3,7 +3,14 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	map.createMap();
+	Vg::heightScreen = ofGetWindowHeight();
+	Vg::widthScreen = ofGetWindowWidth();
+	
+	// creation de la map
+	// bizarrement si on passe par le constructeur, heightscreen et widthscreen sont affecté après la création de la map
+	// WTF OMG ?!?
+	// Faut se renseigner sur le fonctionnement des compilateurs
+	map.init();
 
 }
 
@@ -24,7 +31,7 @@ void ofApp::update(){
 	} else if ( moveCameraRight ){
 
 		Vg::posHautGaucheCameraX += Vg::scrollSpeed;
-		if ( Vg::posHautGaucheCameraX >= 3840-Vg::widthScreen ){Vg::posHautGaucheCameraX = 3840-Vg::widthScreen;}
+		if ( Vg::posHautGaucheCameraX >= Vg::fboAllocateWidth-Vg::widthScreen ){Vg::posHautGaucheCameraX = Vg::fboAllocateWidth-Vg::widthScreen;}
 
 	}
 	// Camera Top Down
@@ -36,11 +43,9 @@ void ofApp::update(){
 	} else if ( moveCameraDown ){
 
 		Vg::posHautGaucheCameraY += Vg::scrollSpeed;
-		if ( Vg::posHautGaucheCameraY >= 2560-Vg::heightScreen ){Vg::posHautGaucheCameraY = 2560-Vg::heightScreen;}
+		if ( Vg::posHautGaucheCameraY >= Vg::fboAllocateHeight-Vg::heightScreen ){Vg::posHautGaucheCameraY = Vg::fboAllocateHeight-Vg::heightScreen;}
 
 	}
-	std::cout << "camera Y : " << Vg::posHautGaucheCameraY << std::endl;
-	std::cout << "hauteur fenetre: " << Vg::heightScreen << std::endl;
 
 }
 
