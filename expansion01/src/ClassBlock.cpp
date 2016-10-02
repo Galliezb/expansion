@@ -27,7 +27,11 @@ void Block::createMap(){
 	// 20 de ciel ( donc 0-19, minable à partir de 20 )
 	// centre des cases en X = 0-59 / 60-119
 
-	int xMin = Vg::fboAllocateWidth/32/2;
+	int xMin = 0;
+	cout << Vg::widthScreen << " VS " << Vg::numberOfCaseMapX*32 << endl;
+	if ( Vg::widthScreen > Vg::numberOfCaseMapX*32 ){
+		xMin = Vg::widthScreen/32/2 - Vg::numberOfCaseMapX/2;
+	}
 	int yMin = 0;
 	/****************************   Dessiner le ciel   **********************************/
 
@@ -36,8 +40,8 @@ void Block::createMap(){
 	for(int y=0;y<Vg::fboAllocateHeight/32;y++){
 		for(int x=0;x<Vg::fboAllocateWidth/32;x++){
 
-			if ( y <= Vg::numberOfCaseMapY && x > xMin && x <= xMin + Vg::numberOfCaseMapX ){
-				spriteSheet.drawSubsection(x*32,y*32,32,32,64,0);
+			if ( y <= Vg::numberOfCaseMapY && x >= xMin && x <= xMin + Vg::numberOfCaseMapX ){
+				spriteSheet.drawSubsection(x*32,y*32,32,32,64,32);
 			}
 
 		}
