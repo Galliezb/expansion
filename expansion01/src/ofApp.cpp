@@ -111,6 +111,7 @@ void ofApp::mouseExited(int x, int y){
 void ofApp::windowResized(int w, int h){
 	Vg::heightScreen = ofGetWindowHeight();
 	Vg::widthScreen = ofGetWindowWidth();
+	map.init();
 }
 
 //--------------------------------------------------------------

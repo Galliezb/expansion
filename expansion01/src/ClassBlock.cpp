@@ -5,6 +5,8 @@ Block::Block(){
 	// chargement des images
 	spriteSheet.load("img/spriteSheet.png");
 	background.load("img/fond01.jpg");
+	navette.load("img/navette.png");
+	robot.load("img/robot.png");
 }
 void Block::init(){
 
@@ -12,7 +14,6 @@ void Block::init(){
 	(Vg::numberOfCaseMapX*32 < Vg::widthScreen  ) ? Vg::fboAllocateWidth = Vg::widthScreen   : Vg::fboAllocateWidth  = Vg::numberOfCaseMapX*32;
 	(Vg::numberOfCaseMapY*32 < Vg::heightScreen ) ? Vg::fboAllocateHeight = Vg::heightScreen : Vg::fboAllocateHeight = Vg::numberOfCaseMapY*32;
 	fbo.allocate(Vg::fboAllocateWidth,Vg::fboAllocateHeight);
-
 	createMap();
 }
 void Block::drawMap(){	
@@ -21,7 +22,7 @@ void Block::drawMap(){
 void Block::createMap(){
 
 	fbo.begin();
-
+	
 	// Carte de taille 3840 * 2560 ( case de 32 pixels )
 	// soit 120*80 cases au total
 	// 20 de ciel ( donc 0-19, minable à partir de 20 )

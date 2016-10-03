@@ -9,5 +9,5 @@ public:
 	void init();
 private :
 	ofFbo fbo;
-	ofImage spriteSheet,background;
+	ofImage spriteSheet,background, navette, robot;
 };
